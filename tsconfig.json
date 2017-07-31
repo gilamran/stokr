@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "allowJs": true,
+    "checkJs": true,
+    "sourceMap": true, 
+    "outDir": "./dist",
+    "removeComments": false
+  },
+  "include": [
+    "./scripts/**/*.ts"
+  ]
+}
