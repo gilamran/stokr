@@ -6,9 +6,11 @@
     "checkJs": true,
     "sourceMap": true, 
     "outDir": "./dist",
-    "removeComments": false
+    "removeComments": false,
+    "lib": ["es2015", "dom"]
   },
   "include": [
-    "./scripts/**/*.ts"
+    "./scripts/**/*.js",
+    "./scripts/types.d.ts"
   ]
 }
