@@ -2,15 +2,12 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "allowJs": true,
-    "checkJs": true,
     "sourceMap": true, 
     "outDir": "./dist",
     "removeComments": false,
     "lib": ["es2015", "dom"]
   },
   "include": [
-    "./scripts/**/*.js",
-    "./scripts/types.d.ts"
+    "./scripts/**/*.ts"
   ]
 }

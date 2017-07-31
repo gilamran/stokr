@@ -4,8 +4,8 @@
 
 (function () {
   // view
-  let content = {};
-  let changePresentation = {};
+  let content: any = {};
+  let changePresentation: any = {};
 
   window.Stoker = window.Stoker || {};
 
