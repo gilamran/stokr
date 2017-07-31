@@ -1,8 +1,7 @@
 /**
  * Created by etay on 18/07/2017.
  */
-(function () {
-
+namespace Stoker.controller {
   const changePresentationEnum = {
     'percentage': 0,
     'change': 1,
@@ -18,14 +17,13 @@
     'length': 5
   };
 
-  window.Stoker = window.Stoker || {};
-  const view = window.Stoker.view;
-  const model = window.Stoker.model;
+  const view = Stoker.view;
+  const model = Stoker.model;
   let state = model.getState();
 
   // public
 
-  function addStock(stockSymbol) {
+  export function addStock(stockSymbol) {
     let requestedStocksArray = state.ui.requestedStocks.slice();
     requestedStocksArray.push(stockSymbol);
     updateUIStateProperty('requestedStocks', requestedStocksArray);
@@ -37,7 +35,7 @@
     refreshData();
   }
 
-  function removeStock(stockSymbol) {
+  export function removeStock(stockSymbol) {
     let stockIndex = state.data.findIndex(stock => stock.Symbol === stockSymbol);
     let requestedStocksArray = state.ui.requestedStocks.slice();
     requestedStocksArray.splice(stockIndex,1);
@@ -45,7 +43,7 @@
     refreshData();
   }
 
-  function shiftStocks(stockSymbol, direction) {
+  export function shiftStocks(stockSymbol, direction) {
     let stocksIndexes = findSwitchedStocksIndexes(stockSymbol, direction, state.data);
     let requestedStocksArray = state.ui.requestedStocks.slice();
     shiftStocksInArray(state.data, stocksIndexes.current, stocksIndexes.switch);
@@ -55,19 +53,19 @@
     view.renderHtmlPage(newState);
   }
 
-  function toggleChange() {
+  export function toggleChange() {
     let newState = updateUIStateProperty('change', (state.ui.change + 1) % changePresentationEnum.length);
     view.renderHtmlPage(newState);
   }
 
-  function updateScreen(screenId) {
+  export function updateScreen(screenId) {
     initializeData();
     let newState = updateUIStateProperty('screen', screenId);
 
     view.renderHtmlPage(newState);
   }
 
-  function refreshData() {
+  export function refreshData() {
     const state = model.getState();
 
     fetchStocks(state.ui.requestedStocks)
@@ -75,7 +73,7 @@
       .then(() => view.renderHtmlPage(state));
   }
 
-  function filterStocks(filteredFields) {
+  export function filterStocks(filteredFields) {
     const name = filteredFields['name'].toLowerCase();
     const gain = filteredFields['gain'].toLowerCase();
     const from = parseFloat(filteredFields['from']);
@@ -98,14 +96,14 @@
     return state.data.filter(stock => namePredicate(stock) && gainPredicate(stock) && fromPredicate(stock) && toPredicate(stock));
   }
 
-  function searchStocks(searchFieldValue) {
+  export function searchStocks(searchFieldValue) {
     return  fetch(`http://localhost:7000/search?q=${searchFieldValue}`)
       .then(response => response.json())
       .then(data => data.ResultSet.Result ? data.ResultSet.Result : [] )
       .then(data => Array.isArray(data) ? data : [data]);
   }
 
-  function updateUIStateProperty(key, value) {
+  export function updateUIStateProperty(key, value) {
     const state = model.getState();
 
     if (state.ui[key] !== value) {
@@ -179,19 +177,6 @@
     setInterval(refreshData, 600000);
   }
 
-  window.Stoker.controller = {
-    shiftStocks,
-    toggleChange,
-    updateScreen,
-    filterStocks,
-    refreshData,
-    removeStock,
-    updateUIStateProperty,
-    searchStocks,
-    addStock
-  };
-
   init();
-})();
-
+}
 

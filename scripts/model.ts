@@ -1,14 +1,11 @@
 /**
  * Created by etay on 23/07/2017.
  */
-
-(function () {
-
+namespace Stoker.model {
   let stocks = [];
   let content = {};
   let changePresentation = {};
 
-  window.Stoker = window.Stoker || {};
   let state = {
     ui: {
       screen: 1,
@@ -28,19 +25,13 @@
 
   // public
 
-  function getState() {
+  export function getState() {
     return state;
   }
 
-  function init(screensEnum, changeEnum) {
+  export function init(screensEnum, changeEnum) {
     content = screensEnum;
     changePresentation = changeEnum;
   }
 
-  window.Stoker.model = {
-    getState,
-    init
-  };
-
-
-})();
+}

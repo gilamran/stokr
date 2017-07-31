@@ -2,12 +2,10 @@
  * Created by etay on 23/07/2017.
  */
 
-(function () {
+namespace Stoker.view {
   // view
   let content: any = {};
   let changePresentation: any = {};
-
-  window.Stoker = window.Stoker || {};
 
   //private
 
@@ -20,7 +18,7 @@
   }
 
   function renderStokrMainContent(state) {
-    const ctrl = window.Stoker.controller;
+    const ctrl = Stoker.controller;
     let contentString = `<main class="main-content">`;
 
     if (isScreen(state.ui.screen, 'filter')) {
@@ -216,7 +214,7 @@
   }
 
   function dispatchEvents(e) {
-    const ctrl = window.Stoker.controller;
+    const ctrl = Stoker.controller;
     const target = e.target;
     let targetDataSymbol = target.getAttribute('data-symbol');
 
@@ -235,7 +233,7 @@
   }
 
   function dispatchHeaderEvents(e) {
-    const ctrl = window.Stoker.controller;
+    const ctrl = Stoker.controller;
     const target = e.target;
 
     if (target.classList.contains('selected')) {
@@ -250,7 +248,7 @@
   }
 
   function dispatchFilterEvents(e) {
-    const ctrl = window.Stoker.controller;
+    const ctrl = Stoker.controller;
     const target = e.target;
     const currentTarget = e.currentTarget;
 
@@ -274,7 +272,7 @@
       return;
     }
 
-    const  ctrl = window.Stoker.controller;
+    const  ctrl = Stoker.controller;
     const searchFieldValue = e.currentTarget.querySelector('#search-stock').value;
     ctrl.updateUIStateProperty('searchField', searchFieldValue);
 
@@ -284,7 +282,7 @@
   }
 
   function handleHashChange() {
-    const ctrl = window.Stoker.controller;
+    const ctrl = Stoker.controller;
     let screenId = content.stocks;
     let hashValue = getHashValue();
     if (hashValue) {
@@ -299,18 +297,18 @@
 
   // public
 
-  function getHashValue() {
+  export function getHashValue() {
     return document.location.hash.replace('#', '');
   }
 
-  function init(screensEnum, changeEnum) {
+  export function init(screensEnum, changeEnum) {
       content = screensEnum;
       changePresentation = changeEnum;
 
       window.addEventListener('hashchange', handleHashChange);
   }
 
-  function renderHtmlPage(state) {
+  export function renderHtmlPage(state) {
     const rootElement = document.querySelector('.root');
     rootElement.innerHTML = renderHeader(state.ui.screen) + renderMainContent(state);
     rootElement.querySelector('.stock-list') &&  rootElement.querySelector('.stock-list').addEventListener('click', dispatchEvents);
@@ -318,11 +316,4 @@
     rootElement.querySelector('.filter-section') && rootElement.querySelector('.filter-section').addEventListener('click', dispatchFilterEvents);
     rootElement.querySelector('.search-header') && rootElement.querySelector('.search-header').addEventListener('keypress', dispatchSearchEvents);
   }
-
-  window.Stoker.view = {
-    renderHtmlPage,
-    init,
-    getHashValue
-  }
-
-})();
+}
