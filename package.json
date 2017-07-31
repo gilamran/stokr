@@ -1,0 +1,20 @@
+{
+  "name": "stokr",
+  "version": "1.0.0",
+  "description": "> A stock ticker is a report of the price for certain securities, updated continuously throughout the trading session by the various stock exchanges. A \"tick\" is any change in price, whether that movement is up or down.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gilamran/stokr.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gilamran/stokr/issues"
+  },
+  "homepage": "https://github.com/gilamran/stokr#readme"
+}
