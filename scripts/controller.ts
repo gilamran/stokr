@@ -20,7 +20,7 @@ namespace Stoker.controller {
   const view = Stoker.view;
   const model = Stoker.model;
   let state = model.getState();
-
+  
   // public
 
   export function addStock(stockSymbol) {
